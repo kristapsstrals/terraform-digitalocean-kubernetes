@@ -1,6 +1,5 @@
 variable "do_token" {}
-
-variable "namespace" {
+variable "cluster_name" {
   type = string
   default = "krisstech"
 }

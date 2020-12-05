@@ -1,11 +1,11 @@
-resource "kubernetes_service" "echo" {
+resource "kubernetes_service" "echo1" {
   metadata {
     name = "echo1"
-    namespace = var.namespace
+    namespace = kubernetes_namespace.cluster_namespace.metadata.0.name
   }
   spec {
     selector = {
-      app = kubernetes_deployment.echo.metadata.0.labels.app
+      app = kubernetes_deployment.echo1.metadata.0.labels.app
     }
 
     port {
@@ -17,10 +17,10 @@ resource "kubernetes_service" "echo" {
   }
 }
 
-resource "kubernetes_deployment" "echo" {
+resource "kubernetes_deployment" "echo1" {
   metadata {
     name = "echo1"
-    namespace = var.namespace
+    namespace = kubernetes_namespace.cluster_namespace.metadata.0.name
     labels = {
       app = "echo1"
     }
@@ -62,7 +62,7 @@ resource "kubernetes_deployment" "echo" {
 resource "kubernetes_service" "echo2" {
   metadata {
     name = "echo2"
-    namespace = var.namespace
+    namespace = kubernetes_namespace.cluster_namespace.metadata.0.name
   }
   spec {
     selector = {
@@ -81,7 +81,7 @@ resource "kubernetes_service" "echo2" {
 resource "kubernetes_deployment" "echo2" {
   metadata {
     name = "echo2"
-    namespace = var.namespace
+    namespace = kubernetes_namespace.cluster_namespace.metadata.0.name
     labels = {
       app = "echo2"
     }
